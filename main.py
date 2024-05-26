@@ -3,6 +3,10 @@ import pyzbar.pyzbar as pyzbar
 
 cap = cv2.VideoCapture(0) # 숫자 0은 메인카메라, 저 같은 경우는 노트북이니까 웹캠이 메인
 
+if not cap.isOpened():
+    print("연결된 카메라 없음")
+    exit()
+
 while True:
     success, frame = cap.read() # success는 카메라로 프레임 읽혔는지 확인하는 용도, false면 안읽힌거, frame은 현재 프레임(이미지)
     if success: 
@@ -29,7 +33,7 @@ while True:
         if key != -1: # -1 이 아니니까 키 입력했다는 뜻, 즉 프로그램 종료
             break
     else:
-        print("카메라 녹화 안되고 있음")
+        print("카메라 녹화 에러")
         break
 
 cap.release()
